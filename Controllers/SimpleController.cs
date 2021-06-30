@@ -23,7 +23,7 @@ namespace TestWebAPI.Controllers
         [HttpGet]
         public string Get()
         {
-            string version = "v1";
+            string version = "v2";
             return $"{version} {System.Environment.MachineName}";
         }
     }

@@ -23,7 +23,14 @@ namespace TestWebAPI.Controllers
         [HttpGet]
         public string Get()
         {
-            string version = "v2";
+            string version = "v3";
+
+            string envVersion = Environment.GetEnvironmentVariable("TEST_WEBAPI_VERSION");
+            if (envVersion != null)
+            {
+                version = envVersion;
+            }
+
             return $"{version} {System.Environment.MachineName}";
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,13 +26,19 @@ namespace TestWebAPI.Controllers
         {
             string version = "v3";
 
+            List<string> environmentVariables = new List<string>();
+            foreach (DictionaryEntry de in Environment.GetEnvironmentVariables())
+            {
+                environmentVariables.Add($"{de.Key} = {de.Value}");
+            }
+
             string envVersion = Environment.GetEnvironmentVariable("TEST_WEBAPI_VERSION");
             if (envVersion != null)
             {
                 version = envVersion;
             }
 
-            return $"{version} {System.Environment.MachineName}";
+            return $"{version} {System.Environment.MachineName} {string.Join(',', environmentVariables)}";
         }
     }
 }
